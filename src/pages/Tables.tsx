@@ -48,12 +48,18 @@ const Tables: React.FC = () => {
       <ProgressBar/>
 
       <div className="flex flex-col gap-10 mt-4">
-        <CsvUploader onFilesUpload={handleFilesUpload} />
+        <div id='call-instructions'>
         <CallInstruction />
+        </div>
+        <div id="follow-up">
         <FollowUp />
-       <div className="bg-white rounded-md p-4">
-  <div className="flex justify-between items-center">
-    <div>
+        </div>
+        <div id="upload-file">
+        <CsvUploader onFilesUpload={handleFilesUpload} />
+        </div>
+      <div className="bg-white rounded-md p-4" id="schedule-calls">
+  <div className="flex flex-wrap justify-between items-center">
+    <div className="w-full sm:w-auto mb-4 sm:mb-0">
       <label htmlFor="callCapacity" className="text-slate-700 font-bold">
         Select Calls per Day:
       </label>
@@ -63,7 +69,7 @@ const Tables: React.FC = () => {
       <select
         disabled
         id="callCapacity"
-        className="block mt-1 border-[1px] border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 cursor-not-allowed"
+        className="block mt-1 border-[1px] h-7 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 cursor-not-allowed w-full sm:w-auto"
         value={selectedCapacity}
         onChange={handleCapacityChange}
       >
@@ -74,7 +80,7 @@ const Tables: React.FC = () => {
       </select>
     </div>
     
-    <div className="ml-4">
+    <div className="w-full sm:w-auto mb-4 sm:mb-0">
       <label htmlFor="startDate" className="text-slate-700 font-bold">
         Start Date:
       </label>
@@ -85,13 +91,13 @@ const Tables: React.FC = () => {
         disabled
         type="date"
         id="startDate"
-        className="block mt-1 border-[1px] border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 cursor-not-allowed"
+        className="block mt-1 border-[1px] h-7 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 cursor-not-allowed w-full sm:w-auto"
         defaultValue={new Date().toISOString().substr(0, 10)}
       />
     </div>
 
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      className="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       onClick={simulateProgress}
     >
       <svg
@@ -110,6 +116,7 @@ const Tables: React.FC = () => {
     </button>
   </div>
 </div>
+
 
 
         {/* <TableFile uploadedFiles={uploadedFiles} /> */}

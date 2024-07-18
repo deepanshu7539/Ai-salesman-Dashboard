@@ -30,19 +30,19 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({ onFilesUpload }) => {
 
   return (
     <div className="flex items-start justify-center rounded-md bg-white p-4">
-      <div className="w-full bg-white rounded-lg shadow-md p-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Upload CSV Files</h2>
-         {/* Download Sample CSV Link */}
-        <div className="mb-4">
-          <a
-            href="/sample.csv" // Replace with the actual path to your sample CSV file
-            download="sample.csv"
-            className="text-md text-red-600 hover:text-gray-900"
-          >
-            Download Sample CSV
-          </a>
-        </div>
+      <div className="w-full max-w-full bg-white rounded-lg shadow-md p-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
+          <h2 className="text-lg font-medium text-gray-900">Upload CSV Files</h2>
+          {/* Download Sample CSV Link */}
+          <div className="mt-2 sm:mt-0">
+            <a
+              href="/sample.csv" // Replace with the actual path to your sample CSV file
+              download="sample.csv"
+              className="text-md text-red-600 hover:text-gray-900"
+            >
+              Download Sample CSV
+            </a>
+          </div>
         </div>
        
         <p className="text-sm text-gray-600 mb-4">
@@ -110,8 +110,6 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({ onFilesUpload }) => {
         >
           Upload
         </button>
-        
-       
       </div>
     </div>
   );
