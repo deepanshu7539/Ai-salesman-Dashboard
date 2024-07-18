@@ -73,7 +73,7 @@ const Tables: React.FC = () => {
         value={selectedCapacity}
         onChange={handleCapacityChange}
       >
-        <option value={50}>All calls</option>
+        <option value={50}>All call</option>
         <option value={50}>50 calls/day</option>
         <option value={100}>100 calls/day</option>
         <option value={200}>200 calls/day</option>
