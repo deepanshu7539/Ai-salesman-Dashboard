@@ -176,7 +176,7 @@ const TableOne: React.FC = () => {
       {/* Modal for Follow Up */}
       {followUpModalIsOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg max-w-xl w-full top-10 relative">
+          <div className="bg-white p-4 rounded-lg shadow-lg max-w-2xl w-full top-10 relative">
             <button
               className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
               onClick={closeFollowUpModal}

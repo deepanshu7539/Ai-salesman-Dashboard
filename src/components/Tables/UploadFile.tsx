@@ -104,12 +104,12 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({ onFilesUpload }) => {
             </div>
           )}
         </div>
-        <button
+        {/* <button
           className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700"
           onClick={handleUpload}
         >
           Upload
-        </button>
+        </button> */}
       </div>
     </div>
   );
