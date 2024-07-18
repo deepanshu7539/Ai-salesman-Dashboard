@@ -1,11 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 
 interface CsvUploaderProps {
-  onFilesUpload: (files: File[]) => void; // Define the prop type for file upload callback
+  onFilesUpload: (files: File[]) => void;
 }
 
-
-const CsvUploader: React.FC<CsvUploaderProps> = ({onFilesUpload}) => {
+const CsvUploader: React.FC<CsvUploaderProps> = ({ onFilesUpload }) => {
   const [csvFiles, setCsvFiles] = useState<File[]>([]);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +16,6 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({onFilesUpload}) => {
       alert("Please upload a valid CSV file.");
     }
   };
-
 
   const handleRemoveFile = (index: number) => {
     setCsvFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
@@ -33,7 +31,20 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({onFilesUpload}) => {
   return (
     <div className="flex items-start justify-center rounded-md bg-white p-4">
       <div className="w-full bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">Upload CSV Files</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Upload CSV Files</h2>
+         {/* Download Sample CSV Link */}
+        <div className="mb-4">
+          <a
+            href="/sample.csv" // Replace with the actual path to your sample CSV file
+            download="sample.csv"
+            className="text-md text-red-600 hover:text-gray-900"
+          >
+            Download Sample CSV
+          </a>
+        </div>
+        </div>
+       
         <p className="text-sm text-gray-600 mb-4">
           Please upload CSV files containing the following fields:
           <ul className="text-sm text-gray-600 mb-4 list-disc pl-4">
@@ -94,12 +105,13 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({onFilesUpload}) => {
           )}
         </div>
         <button
-         
           className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700"
           onClick={handleUpload}
         >
           Upload
         </button>
+        
+       
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FollowUp from './FollowUp';
 
 interface Call {
   date: string;
@@ -50,7 +51,6 @@ const TableOne: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
   const [followUpModalIsOpen, setFollowUpModalIsOpen] = useState<boolean>(false);
-  const [followUpMessage, setFollowUpMessage] = useState<string>('');
 
   const openModal = (company: Company) => {
     setSelectedCompany(company);
@@ -63,20 +63,12 @@ const TableOne: React.FC = () => {
   };
 
   const openFollowUpModal = () => {
-    // setSelectedCompany();
     setFollowUpModalIsOpen(true);
   };
 
   const closeFollowUpModal = () => {
     setFollowUpModalIsOpen(false);
-    setFollowUpMessage('');
     setSelectedCompany(null);
-  };
-
-  const handleFollowUpSubmit = () => {
-    // Handle the follow-up message submission logic here
-    console.log(`Follow-up message for ${selectedCompany?.field1}: ${followUpMessage}`);
-    closeFollowUpModal();
   };
 
   return (
@@ -85,9 +77,9 @@ const TableOne: React.FC = () => {
         Call Record and Details
       </h3>
       <div className="shadow-lg p-2 h-[81vh] overflow-auto">
-        <div className='flex justify-end mr-6'>
-          <button
-                    className="text-white hover:text-white text-sm flex justify-center items-center bg-green-600 p-2 rounded-lg"
+        <div className='flex justify-end items-center mr-4'>
+           <button
+                    className="text-white hover:text-white text-sm flex  justify-center gap-2 bg-green-600 p-2  rounded-lg"
                     onClick={() => openFollowUpModal()}
                   >
                     <svg
@@ -108,7 +100,6 @@ const TableOne: React.FC = () => {
                   </button>
         </div>
         <table className="min-w-full divide-y divide-gray-300 rounded-lg">
-          
           <thead className="bg-gray-100">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -154,7 +145,7 @@ const TableOne: React.FC = () => {
                   </span>
                 </td>
                 <td className="px-6 py-2 overflow-x-auto space-y-2">
-                  
+                 
                   <button
                     className="text-white hover:text-white text-sm flex justify-center items-center bg-blue-400 p-2 rounded-lg"
                     onClick={() => openModal(item)}
@@ -184,102 +175,50 @@ const TableOne: React.FC = () => {
 
       {/* Modal for Follow Up */}
       {followUpModalIsOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50" onClick={closeFollowUpModal}></div>
-          <div className="bg-white p-6 rounded-md shadow-lg z-10 w-1/3">
-            <h2 className="text-lg font-semibold mb-4">Follow Up with {selectedCompany?.field1}</h2>
-            <textarea
-              className="w-full p-2 border rounded-lg mb-4"
-              rows={4}
-              value={followUpMessage}
-              onChange={(e) => setFollowUpMessage(e.target.value)}
-              placeholder="Enter your follow-up message here..."
-            />
-            <div className="flex justify-end space-x-2">
-              <button
-                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md"
-                onClick={closeFollowUpModal}
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg max-w-xl w-full top-10 relative">
+            <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+              onClick={closeFollowUpModal}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
               >
-                Cancel
-              </button>
-              <button
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
-                onClick={handleFollowUpSubmit}
-              >
-                Send Follow-Up
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <FollowUp  />
           </div>
         </div>
       )}
 
       {/* Modal for Call Details */}
-      {selectedCompany && (
-        <div
-          className={`fixed z-10 inset-0 overflow-y-auto ${
-            modalIsOpen ? "block" : "hidden"
-          }`}
-          aria-labelledby="modal-title"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div
-              className="fixed inset-0 bg-black opacity-50 transition-opacity"
-              aria-hidden="true"
+      {modalIsOpen && selectedCompany && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg max-w-lg w-full">
+            <h2 className="text-lg font-semibold mb-4">Call Details</h2>
+            <ul>
+              {selectedCompany.calls.map((call, index) => (
+                <li key={index}>
+                  <strong>Date:</strong> {call.date} | <strong>Template:</strong> {call.template}
+                </li>
+              ))}
+            </ul>
+            <button
+              className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
               onClick={closeModal}
-            ></div>
-            <span
-              className="hidden sm:inline-block sm:align-middle sm:h-screen"
-              aria-hidden="true"
             >
-              &#8203;
-            </span>
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-              <div>
-                <h3
-                  className="text-lg leading-6 font-medium text-gray-900"
-                  id="modal-title"
-                >
-                  Company Details
-                </h3>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    <strong>Company Name:</strong> {selectedCompany.field1}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    <strong>Phone:</strong> {selectedCompany.field2}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    <strong>Website:</strong> {selectedCompany.field3}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    <strong>Email:</strong> {selectedCompany.field4}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    <strong>Founder Name:</strong> {selectedCompany.field5}
-                  </p>
-                  <h3 className="text-lg font-semibold mt-4">Calls</h3>
-                  <ul className="list-disc ml-6">
-                    {selectedCompany.calls.map((call, index) => (
-                      <li key={index} className="mb-2">
-                        <strong>Date:</strong> {call.date},{" "}
-                        <strong>Response:</strong> {call.template}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-5 sm:mt-6">
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
-                  onClick={closeModal}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
+              Close
+            </button>
           </div>
         </div>
       )}
