@@ -21,12 +21,12 @@ const CsvUploader: React.FC<CsvUploaderProps> = ({ onFilesUpload }) => {
     setCsvFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const handleUpload = () => {
-    // Call the callback with csvFiles state when Upload button is clicked
-    onFilesUpload(csvFiles);
-    // Optionally, you can reset the state after uploading
-    setCsvFiles([]);
-  };
+  // const handleUpload = () => {
+  //   // Call the callback with csvFiles state when Upload button is clicked
+  //   onFilesUpload(csvFiles);
+  //   // Optionally, you can reset the state after uploading
+  //   setCsvFiles([]);
+  // };
 
   return (
     <div className="flex items-start justify-center rounded-md bg-white p-4">
