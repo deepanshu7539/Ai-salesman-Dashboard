@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
-import LogoIcon from '../../images/logo/ai-salesman-1.svg';
+import LogoIcon from '../../images/logo/AI-salesman-1.svg';
 // import DarkModeSwitcher from './DarkModeSwitcher';
 
 const Header = (props: {
