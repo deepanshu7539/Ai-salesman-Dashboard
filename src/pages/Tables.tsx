@@ -7,8 +7,7 @@ import ProgressBar from './UiElements/ProgressBar';
 
 const Tables: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [progress, setProgress] = useState<number>(0);
-  const [selectedCapacity, setSelectedCapacity] = useState<number>(50); // Initial selected capacity
+  const [selectedCapacity, setSelectedCapacity] = useState<number>(50);
   const [startDate, setStartDate] = useState<string>(new Date().toISOString().substr(0, 10));
   const [callInstructions, setCallInstructions] = useState<string[]>([]);
   const [followUpText, setFollowUpText] = useState<string>('');
@@ -34,21 +33,9 @@ const Tables: React.FC = () => {
     setFollowUpText(text);
   };
 
-  const simulateProgress = () => {
-    let progressValue = 0;
-    const interval = setInterval(() => {
-      progressValue += 10;
-      setProgress(progressValue);
-      if (progressValue >= 100) {
-        clearInterval(interval);
-      }
-    }, 500);
-  };
 
   const handleStartCall = async () => {
-    simulateProgress();
 
-    // Collect data to send
     const formData = new FormData();
     formData.append('capacity', selectedCapacity.toString());
     formData.append('startDate', startDate);
@@ -63,16 +50,14 @@ const Tables: React.FC = () => {
     });
 
     try {
-      const response = await fetch('YOUR_API_ENDPOINT', {
+      const response = await fetch('http://localhost:8000/loop', {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
-        // Handle successful response
         console.log('Data sent successfully');
       } else {
-        // Handle error response
         console.error('Error sending data');
       }
     } catch (error) {
@@ -83,7 +68,7 @@ const Tables: React.FC = () => {
   return (
     <>
       <Breadcrumb pageName="All Data" />
-      <ProgressBar progress={progress} />
+      <ProgressBar />
 
       <div className="flex flex-col gap-10 mt-4">
         <div id='call-instructions'>
@@ -105,7 +90,7 @@ const Tables: React.FC = () => {
                 PRO
               </span>
               <select
-              disabled
+                disabled
                 id="callCapacity"
                 className="block mt-1 border-[1px] h-7 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 cursor-not-allowed w-full sm:w-auto"
                 value={selectedCapacity}
@@ -126,7 +111,7 @@ const Tables: React.FC = () => {
                 PRO
               </span>
               <input
-              disabled
+                disabled
                 type="date"
                 id="startDate"
                 className="block mt-1 border-[1px] h-7 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50 cursor-not-allowed w-full sm:w-auto"

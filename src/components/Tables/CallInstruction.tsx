@@ -14,19 +14,20 @@ const InstructionList: React.FC<InstructionProps> = ({ instructions }) => {
   );
 };
 
-const CallInstruction: React.FC = () => {
+const CallInstruction: React.FC<{ onChange: (instructions: string[]) => void }> = ({ onChange }) => {
   const [text, setText] = useState<string>('');
   const instructions = [
-    "Describe how the AI Should behave on the phone call.",
+    "Describe how the AI should behave on the phone call.",
     "You can write up to 300 letters.",
   ];
 
   const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const letterCount = event.target.value.length;
-    if (letterCount <= 300) {
+    if (letterCount <= 800) {
       setText(event.target.value);
+      onChange([event.target.value]);
     } else {
-      setText(event.target.value.slice(0, 300));
+      setText(event.target.value.slice(0, 800));
     }
   };
 
@@ -45,7 +46,7 @@ const CallInstruction: React.FC = () => {
           placeholder="Start typing here..."
         />
         <div className="text-right text-sm text-gray-600 mt-2">
-          Letter count: {letterCount} / 300
+          Letter count: {letterCount} / 800
         </div>
       </div>
     </div>

@@ -50,10 +50,10 @@ const ProgressBar: React.FC = () => {
         <li className="relative md:flex md:flex-1">
           <a href="#schedule-calls" className="group flex items-center">
             <span className="flex items-center px-6 py-4 text-sm font-medium">
-              <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-300 group-hover:border-indigo-600">
-                <span className="text-indigo-600 group-hover:text-gray-900">04</span>
+              <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-indigo-600 group-hover:border-indigo-600">
+                <span className="text-indigo-600">04</span>
               </span>
-              <span className="ml-4 text-sm font-medium text-indigo-600 group-hover:text-gray-900">Schedule Calls</span>
+              <span className="ml-4 text-sm font-medium text-indigo-600">Schedule Calls</span>
             </span>
           </a>
         </li>
